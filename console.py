@@ -24,6 +24,15 @@ class HBNBCommand(cmd.Cmd):
                  "Place", "City", "State",
                  "Amenity", "Review"]
 
+
+    # def precmd(self, line):
+        
+        # new_line = line.split(".")
+        # if new_line.count() == 2:
+            # cls_name, cmd_gen = new_line
+
+
+
     def do_count(self, line):
         """Prints number of object in a class
         args:
@@ -122,7 +131,10 @@ class HBNBCommand(cmd.Cmd):
         if res_line:
             cls_dict, cls_name_id = res_line
             if cls_name_id in cls_dict.keys():
-                line_split = [i.strip('"') for i in line.split(" ", 3)]
+                line_split = line.split(" ", 3)
+                line_split[3] = line_split[3][1:]
+                temp_ind = line_split[3].index('"')
+                line_split[3] = line_split[3][:temp_ind]
                 if len(line_split) >= 3:
                     if len(line_split) == 4:
                         try:
