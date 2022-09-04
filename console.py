@@ -23,7 +23,6 @@ class HBNBCommand(cmd.Cmd):
     cls_names = ["BaseModel", "User",
                  "Place", "City", "State",
                  "Amenity", "Review"]
-    use_rawinput = False
 
     def do_count(self, line):
         """Prints number of object in a class
