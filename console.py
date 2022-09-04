@@ -44,14 +44,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         """Command exit the program"""
-        return True
+        raise SystemExit
 
     def emptyline(self):
         pass
 
     def do_EOF(self, line):
         """Ends Code"""
-        print("")
         return True
 
     def do_create(self, cls_name):
