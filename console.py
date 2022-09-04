@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_quit(self, arg):
-        """Command exit the program"""
+        """Quit command to exit the program"""
         raise SystemExit
 
     def emptyline(self):
