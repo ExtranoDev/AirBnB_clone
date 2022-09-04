@@ -24,14 +24,23 @@ class HBNBCommand(cmd.Cmd):
                  "Place", "City", "State",
                  "Amenity", "Review"]
 
-
-    # def precmd(self, line):
-        
-        # new_line = line.split(".")
-        # if new_line.count() == 2:
-            # cls_name, cmd_gen = new_line
-
-
+    def precmd(self, line):
+        new_line = line.split(".")
+        if len(new_line) == 2:
+            cls_name, cmd_gen = new_line
+            cmd_nm, cmd_details = cmd_gen.split("(")
+            cmd_details = cmd_details.rstrip(")")
+            if cmd_details:
+                if cmd_nm == "update":
+                    return cmd.Cmd.precmd(self, line)
+                else:
+                    cmd_details = cmd_details.strip('"')
+                    line = cmd_nm + " " + cls_name + " " + cmd_details
+                return line
+            else:
+                line = cmd_nm + " " + cls_name
+                return line
+        return cmd.Cmd.precmd(self, line)
 
     def do_count(self, line):
         """Prints number of object in a class
@@ -83,7 +92,6 @@ class HBNBCommand(cmd.Cmd):
         """
         res_line = HBNBCommand.arg_checker(line)
         if res_line != ():
-            print(res_line)
             if res_line[1] in res_line[0].keys():
                 print(res_line[0][res_line[1]])
             else:
@@ -144,7 +152,7 @@ class HBNBCommand(cmd.Cmd):
                         setattr(cls_dict[cls_name_id],
                                 line_split[2],
                                 line_split[3])
-                        storage.save()
+                        cls_dict[cls_name_id].save()
                     else:
                         print("** value missing **")
                 else:
