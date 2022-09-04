@@ -19,7 +19,7 @@ class HBNBCommand(cmd.Cmd):
     args:
         cmd.Cmd - commad class
     """
-    prompt = "(hbnh) "
+    prompt = "(hbnb) "
     cls_names = ["BaseModel", "User",
                  "Place", "City", "State",
                  "Amenity", "Review"]
