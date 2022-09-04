@@ -25,16 +25,23 @@ class HBNBCommand(cmd.Cmd):
                  "Amenity", "Review"]
 
     def precmd(self, line):
-        new_line = line.split(".")
-        if len(new_line) == 2:
+        new_line = line.split(".", 1)
+        if lem(mew_line) == 2:
             cls_name, cmd_gen = new_line
             cmd_nm, cmd_details = cmd_gen.split("(")
             cmd_details = cmd_details.rstrip(")")
             if cmd_details:
+                cmd_details = cmd_details.replace('"', '')
                 if cmd_nm == "update":
-                    return cmd.Cmd.precmd(self, line)
+                    cmd_spe = cmd_details.split(",")
+                    if len(cmd_spe) == 3:
+                        cmd_spe = [i.strip() for i in cmd_spe]
+                        line = cmd_nm + ' ' + cls_name + ' ' + cmd_spe[0]
+                        line += ' ' + cmd_spe[1] + ' "' + cmd_spe[2] + '"'
+                        print(line)
+                    else:
+                        pass
                 else:
-                    cmd_details = cmd_details.strip('"')
                     line = cmd_nm + " " + cls_name + " " + cmd_details
                 return line
             else:
