@@ -19,7 +19,7 @@ class TestBaseModel(unittest.TestCase):
         return super().setUp()
 
     def tearDown(self):
-        del(self.test_model)
+        del self.test_model
         if os.path.exists("file.json"):
             os.remove("file.json")
         models.storage.clean()
@@ -28,7 +28,6 @@ class TestBaseModel(unittest.TestCase):
     def test_create_inst(self):
         """Test instance creation"""
         self.assertIsInstance(self.test_model, BaseModel)
-
 
     def test_save(self):
         """Tests the save function
@@ -40,13 +39,12 @@ class TestBaseModel(unittest.TestCase):
             file_det = f.read()
             data = json.loads(file_det)
 
-        self.assertTrue(
-                        '{}.{}'.format(type(self.test_model).__name__,
+        self.assertTrue('{}.{}'.format(type(self.test_model).__name__,
                         self.test_model.id) in data)
 
-        self. assertDictEqual(self.test_model.to_dict(),
-                              data['{}.{}'.format(type(self.test_model).__name__,
-                              self.test_model.id)])
+        self. assertDictEqual(self.test_model.to_dict(), data['{}.{}'.format(
+                            type(self.test_model).__name__,
+                            self.test_model.id)])
 
     def test_assign_attr(self):
         """Test new attribute"""
@@ -70,13 +68,16 @@ class TestBaseModel(unittest.TestCase):
         self.test_model.my_number = 24
         my_json_model = self.test_model.to_dict()
 
-        self.assertDictEqual(my_json_model,
-                             {'id': self.test_model.id,
-                             'created_at': self.test_model.created_at.strftime('%Y-%m-%dT%H:%M:%S.%f'),
-                             'updated_at': self.test_model.updated_at.strftime('%Y-%m-%dT%H:%M:%S.%f'),
-                             'name': self.test_model.name,
-                             'my_number': self.test_model.my_number,
-                             '__class__': BaseModel.__name__})
+        self.assertDictEqual(my_json_model, {
+            'id': self.test_model.id,
+            'created_at': self.test_model.created_at.strftime(
+                '%Y-%m-%dT%H:%M:%S.%f'),
+            'updated_at': self.test_model.updated_at.strftime(
+                '%Y-%m-%dT%H:%M:%S.%f'),
+            'name': self.test_model.name,
+            'my_number': self.test_model.my_number,
+            '__class__': BaseModel.__name__})
+
 
 if __name__ == '__main__':
     unittest.main()
