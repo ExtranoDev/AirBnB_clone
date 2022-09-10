@@ -23,6 +23,10 @@ class FileStorage:
         cls_name = type(obj).__name__ + "." + obj.__dict__['id']
         FileStorage.__objects[cls_name] = obj
 
+    def clean(self):
+        """Clears object"""
+        FileStorage.__objects.clear()
+
     def save(self):
         """Updates object to file storage"""
         temp_obj = {}
