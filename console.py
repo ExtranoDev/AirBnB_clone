@@ -146,10 +146,10 @@ class HBNBCommand(cmd.Cmd):
             cls_dict, cls_name_id = res_line
             if cls_name_id in cls_dict.keys():
                 line_split = line.split(" ", 3)
-                line_split[3] = line_split[3][1:]
-                temp_ind = line_split[3].index('"')
-                line_split[3] = line_split[3][:temp_ind]
                 if len(line_split) >= 3:
+                    line_split[3] = line_split[3][1:]
+                    temp_ind = line_split[3].index('"')
+                    line_split[3] = line_split[3][:temp_ind]
                     if len(line_split) == 4:
                         try:
                             line_split[3] = eval(line_split[3])
