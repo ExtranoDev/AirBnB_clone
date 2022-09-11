@@ -27,6 +27,10 @@ class FileStorage:
         """Clears object"""
         FileStorage.__objects.clear()
 
+    def search(self, obj, obj_id):
+        """Returns obj if found"""
+        return self.__objects["{}.{}".format(obj, obj_id)]
+
     def save(self):
         """Updates object to file storage"""
         temp_obj = {}
