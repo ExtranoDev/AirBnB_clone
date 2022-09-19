@@ -84,8 +84,16 @@
     background-image: url("/web_static/images/icon_bath.png");
 }
 
-.user, .description {
+.usrinfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.description {
+    margin-top: -20px;
+}
+
+.user p, .description p {
     text-align: left;
-    font-size: 14px;
     width: 100%;
 }
